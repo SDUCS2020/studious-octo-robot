@@ -485,6 +485,10 @@ async def generate_invite_link(channel_id: int):
     invite_link = await bot.create_chat_invite_link(chat_id=channel_id, member_limit=1)  
     return invite_link.invite_link
 
+@router.message(F.text)
+async def handle_all_messages(message: types.Message):
+    await message.answer("Добро пожаловать в Молодильный бот! Выберите действие:", reply_markup=main_menu)
+
 async def main():
     print("Бот запущен!")
     await dp.start_polling(bot)
